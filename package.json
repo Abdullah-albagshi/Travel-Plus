@@ -34,20 +34,12 @@
     "workbox-webpack-plugin": "^5.1.3"
   },
   "scripts": {
-    "start": "node src/server/index.js",
+    "start": "node src/server/app.js",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server  --config webpack.dev.js --open",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AhmedAlsudairi/FEND-Capstone-Travel-App.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AhmedAlsudairi/FEND-Capstone-Travel-App/issues"
-  },
-  "homepage": "https://github.com/AhmedAlsudairi/FEND-Capstone-Travel-App#readme"
 }
