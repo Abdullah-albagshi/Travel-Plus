@@ -101,18 +101,11 @@ export const createTrip = async() => {
     const duration = subtractDates(startDate, endtDate);
     const destination = document.getElementById('destination').value;
 
-    // Request the apis 
+    // Call the apis 
     geonames =await getFromGeonamesAPI(destination);
-    console.log("createTrip -> geonames", geonames);
     weather =await getFromWeatherbit(geonames);
-    console.log("createTrip -> weather", weather);
     country =await getFromCountryAPI(geonames);
-    console.log("createTrip -> country", country);
     pix =await getFromPixabayAPI(destination);
-    console.log("createTrip -> pix", pix);
-
-
-   
     updateUI(duration, startDate,destination);
 
 

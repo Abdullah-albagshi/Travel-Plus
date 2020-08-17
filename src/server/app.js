@@ -44,7 +44,7 @@ app.get('/geonames/:destination', async (req, res) => {
     }
 });
 
-// get request to Geonames API
+// GET request to Geonames API
 app.get('/pixabay/:destination', async (req, res) => {
 
     const destination=req.params.destination;
@@ -55,8 +55,7 @@ app.get('/pixabay/:destination', async (req, res) => {
     const pixabayURL=process.env.PIX_URL;
 
     const pixabayKey=process.env.PIX_KEY;
-
-    const request = await fetch(pixabayURL + destinationWithoutSpace + pixabayKey);
+    const request = await fetch(`${pixabayURL}/?&image_type=photo&q=${destinationWithoutSpace}&key=${pixabayKey}`);
 
     try {
         const data = await request.json();
@@ -67,6 +66,7 @@ app.get('/pixabay/:destination', async (req, res) => {
     }
 });
 
+// GET request to Weatherbit API
 app.post('/weatherbit', async (req, res) => {
 
     const gedoData=req.body;
@@ -77,7 +77,7 @@ app.post('/weatherbit', async (req, res) => {
 
     const weatherbitKey=process.env.WEATHER_KEY;
 
-    const request = await fetch(weatherbitURL + `?&lat=${lat}&lon=${lng}` + weatherbitKey);
+    const request = await fetch(`${weatherbitURL}?&lat=${lat}&lon=${lng}&key=${weatherbitKey}`);
     try {
         const data = await request.json();
         res.json(data);
