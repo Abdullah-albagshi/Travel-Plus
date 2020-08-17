@@ -182,7 +182,6 @@ export const updateUiWeather=(startDate,data)=>{
       </tr>
     </thead>
     <tbody>`;
-    console.log('data :>> ', data);
     // find the correct date from 16 date forcast array
     for (let i = 0; i < data.length; i++) {
 
@@ -212,7 +211,6 @@ export const getCountdown = (startDate) => {
     const month = String(todayDate.getMonth() + 1).padStart(2, '0');
     const year = todayDate.getFullYear();
     todayDate = year + '-' + month + '-' + day;
-
     const daysLeft = subtractDates(todayDate, startDate);
     return daysLeft;
 }
