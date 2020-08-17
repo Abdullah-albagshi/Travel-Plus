@@ -182,7 +182,8 @@ export const updateUiWeather=(startDate,data)=>{
       </tr>
     </thead>
     <tbody>`;
-    // find the correct date from 16 date forcast array
+    
+    // Find the correct date from 16 date forcast array
     for (let i = 0; i < data.length; i++) {
 
         let b = new Date(data[i].datetime).getTime();
