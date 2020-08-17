@@ -1,87 +1,92 @@
-
+const fetch=require('node-fetch');
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 // Start up an instance of app
-const app = express();
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+
+const app=express();
+
+// Here we are configuring express to use body-parser as middle-ware.
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Cors for cross origin allowance
 app.use(cors());
+
 // Initialize the main project folder
 app.use(express.static('dist'));
 
 // Setup Server
-const port = process.env.PORT ||  5000;
+const PORT = process.env.PORT ||  8080;
 
-const server = app.listen(port, () => { console.log(`The server is running on port number: ${port}`) });
+app.listen(PORT, () => { console.log(`The server is running on port number: ${PORT}`); });
 
-//GET route for geonames data
-app.get('/geo', (req, res) => {
-    res.send(geoData);
-});
 
-//POST route geonames data
-app.post('/geo', (req, res) => {
-    const newData = req.body;
-    const newEntry = {
-        country: newData.countryName,
-        latitude: newData.lat,
-        longitude: newData.lng
+// get request to Geonames API
+app.get('/geonames/:destination', async (req, res) => {
+
+    const destination=req.params.destination;
+
+    // Get the key and the url from env
+    const geonamesURL=process.env.GEO_NAME_URL;
+
+    const geonamesKey=process.env.GEO_KEY;
+    try {
+    // Request the server
+    const response = await fetch(geonamesURL + destination + geonamesKey);
+    
+        const data = await response.json();
+
+        res.json(data);
+
+    } catch (error) {
+        console.log(error);
     }
-    geoData = { ...newEntry };
-    res.send(geoData)
 });
 
-//GET route for weatherbit data
-app.get('/weather', (req, res) => {
+// get request to Geonames API
+app.get('/pixabay/:destination', async (req, res) => {
 
-    res.send(weatherData);
-});
 
-//POST route for weatherbit data
-app.post('/weather', (req, res) => {
-    const newData = req.body;
-    weatherData = { ...newData, length: 16 };
-    res.send(weatherData)
-});
+    // Remove the whites spaces from the destination
+    let destinationWithoutSpace = destination.split(' ');
+    destinationWithoutSpace = destinationWithoutSpace.join('+');
 
-//GET route for pixabay data
-app.get('/pix', (req, res) => {
+    const pixabayURL=process.env.PIX_URL;
 
-    res.send(pixabayData);
-});
+    const pixabayKey=process.env.PIX_KEY;
 
-//POST route for pixabay data
-app.post('/pix', (req, res) => {
-    const newData = req.body;
-    pixabayData = { ...newData };
-    res.send(pixabayData)
-});
+    const request = await fetch(pixabayURL + destinationWithoutSpace + pixabayKey);
 
-//GET route for  REST Countries API data
-app.get('/country', (req, res) => {
+    try {
+        const data = await request.json();
+        res.json(data);
 
-    res.send(countriesAPIData);
-});
-
-//POST route for  REST Countries API data
-app.post('/country', (req, res) => {
-    const newData = req.body;
-    const newEntry = {
-        name: newData.name,
-        capital: newData.capital,
-        currency: newData.currencies[0].code,
-        language: newData.languages[0].name,
-        population: newData.population,
-        region: newData.region,
-        timezone: newData.timezones[0]
+    } catch (error) {
+        console.log(error);
     }
-    countriesAPIData = { ...newEntry };
-    res.send(countriesAPIData);
 });
+
+app.get('/weatherbit/:geoData', async (req, res) => {
+
+    const geoData=req.params.geoData;
+
+    const lat = geoData.latitude;
+    const lng = geoData.longitude;
+
+    const weatherbitURL=process.env.WEATHER_URL;
+
+    const weatherbitKey=process.env.WEATHER_KEY;
+
+    const request = await fetch(weatherbitURL + `?&lat=${lat}&lon=${lng}` + weatherbitKey);
+    try {
+        const data = await request.json();
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 
 exports.app = app;

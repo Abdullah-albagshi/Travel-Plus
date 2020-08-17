@@ -1,11 +1,10 @@
-import {createTrip, getCountdown, getFromPixabayAPI, getFromGeonamesAPI, getFromWeatherbit, getData, updateUI, postData, subtractDates, removeTrip, getFromLocalStorage, getFromCountryAPI, greeting, createListener, removeListener, localStorageListener, greetingListener, printListener } from '../client/js/app';
+import {createTrip, getCountdown, getFromPixabayAPI, 
+    getFromGeonamesAPI, getFromWeatherbit, updateUI, 
+    subtractDates, removeTrip, getFromCountryAPI} from '../client/js/request';
 import '../client/styles/style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-// event listeners
-window.addEventListener('load', getFromLocalStorage);
-window.addEventListener("load", greeting, false);
 
 const print = document.getElementById('print');
 print.addEventListener('click', () => {
@@ -25,12 +24,8 @@ export {
     getFromGeonamesAPI,
     getFromWeatherbit,
     getFromPixabayAPI,
-    getData,
     updateUI,
-    postData,
     subtractDates,
-    getFromLocalStorage,
     removeTrip,
     getFromCountryAPI,
-    greeting
 }
