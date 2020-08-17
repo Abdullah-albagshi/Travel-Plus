@@ -17,17 +17,12 @@ export const getFromGeonamesAPI = async (destination) => {
     try {
     const request = await fetch(`http://localhost:8080/geonames/${destination}`);
     const data = await request.json();
-
-    
-        
-        const geonamesData = data.geonames[0];
+    const geonamesData = data.geonames[0];
         const geo = {
             country: geonamesData.countryName,
             latitude: geonamesData.lat,
             longitude: geonamesData.lng
         };
-
-        console.log('geo :>> ', geo);
         return geo;
 
     } catch (error) {
@@ -52,8 +47,13 @@ export const getFromPixabayAPI = async (destination) => {
 // Get request to Weatherbit API
 export const getFromWeatherbit = async (geoData) => {
 
-
-    const response = await fetch(`http://localhost:8080/weatherbit/:geoData`);
+    const response = await fetch(`http://localhost:8080/weatherbit`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(geoData)
+    });
     try {
         const data = await response.json();
 
@@ -103,9 +103,13 @@ export const createTrip = async() => {
 
     // Request the apis 
     geonames =await getFromGeonamesAPI(destination);
+    console.log("createTrip -> geonames", geonames);
     weather =await getFromWeatherbit(geonames);
+    console.log("createTrip -> weather", weather);
     country =await getFromCountryAPI(geonames);
+    console.log("createTrip -> country", country);
     pix =await getFromPixabayAPI(destination);
+    console.log("createTrip -> pix", pix);
 
 
    
@@ -130,7 +134,7 @@ export const updateUI = (duration, startDate,destination) => {
     const dura = `<strong>Duration of your trip:</strong> ${duration} day(s)`;
     document.getElementById('duration').innerHTML = dura;
 
-    updateUiWeather(weather);
+    updateUiWeather(startDate,weather);
     const countryInfo = `<h3>${countdown} day(s) to go!</h3>
                         <br>
                         <strong>Country information:</strong>
@@ -170,7 +174,7 @@ export const subtractDates = (dateOne, dateTwo) => {
     return result;
 }
 
-export const updateUiWeather=(data)=>{
+export const updateUiWeather=(startDate,data)=>{
     let a = new Date(startDate).getTime();
     let counter = 1;
     let temp = `
@@ -185,12 +189,12 @@ export const updateUiWeather=(data)=>{
       </tr>
     </thead>
     <tbody>`;
-
+    console.log('data :>> ', data);
     // find the correct date from 16 date forcast array
     for (let i = 0; i < data.length; i++) {
 
         let b = new Date(data[i].datetime).getTime();
-
+        console.log('b',b);
         if (b >= a) {
             temp += `<tr>
                     <th scope="row">${counter}</th>

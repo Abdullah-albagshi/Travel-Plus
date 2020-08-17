@@ -33,7 +33,7 @@ app.get('/geonames/:destination', async (req, res) => {
     const geonamesKey=process.env.GEO_KEY;
     try {
     // Request the server
-    const response = await fetch(geonamesURL + destination + geonamesKey);
+    const response = await fetch(`${geonamesURL}?q=${destination}&username=${geonamesKey}`);
     
         const data = await response.json();
 
@@ -47,7 +47,7 @@ app.get('/geonames/:destination', async (req, res) => {
 // get request to Geonames API
 app.get('/pixabay/:destination', async (req, res) => {
 
-
+    const destination=req.params.destination;
     // Remove the whites spaces from the destination
     let destinationWithoutSpace = destination.split(' ');
     destinationWithoutSpace = destinationWithoutSpace.join('+');
@@ -67,12 +67,11 @@ app.get('/pixabay/:destination', async (req, res) => {
     }
 });
 
-app.get('/weatherbit/:geoData', async (req, res) => {
+app.post('/weatherbit', async (req, res) => {
 
-    const geoData=req.params.geoData;
-
-    const lat = geoData.latitude;
-    const lng = geoData.longitude;
+    const gedoData=req.body;
+    const lat = gedoData.latitude;
+    const lng = gedoData.longitude;
 
     const weatherbitURL=process.env.WEATHER_URL;
 
