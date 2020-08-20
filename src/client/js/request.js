@@ -101,12 +101,18 @@ export const createTrip = async() => {
     const duration = subtractDates(startDate, endtDate);
     const destination = document.getElementById('destination').value;
 
+    spinner.innerHTML = 'Loading ....';
+
     // Call the apis 
     geonames =await getFromGeonamesAPI(destination);
     weather =await getFromWeatherbit(geonames);
     country =await getFromCountryAPI(geonames);
     pix =await getFromPixabayAPI(destination);
-    updateUI(duration, startDate,destination);
+    spinner.innerHTML = '';
+    updateUiDuration(duration);
+    updateUiWeather(startDate);
+    updateUiCountry(startDate);
+    
 
 
 }
@@ -119,15 +125,13 @@ export const removeTrip = () => {
     document.getElementById('countryInfo').innerHTML = '';
 }
 
-// Update user interface according to the data stored in express server
-export const updateUI = (duration, startDate,destination) => {
-
-    spinner.innerHTML = '';
-    const countdown = getCountdown(startDate);
+export const updateUiDuration = (duration) => {
     const dura = `<strong>Duration of your trip:</strong> ${duration} day(s)`;
     document.getElementById('duration').innerHTML = dura;
+}
 
-    updateUiWeather(startDate,weather);
+export const updateUiCountry = (startDate,country) => {
+    const countdown = getCountdown(startDate);
     const countryInfo = `<h3>${countdown} day(s) to go!</h3>
                         <br>
                         <strong>Country information:</strong>
@@ -139,8 +143,8 @@ export const updateUI = (duration, startDate,destination) => {
                             <br>
                             <div id="caption">${destination}</div>`;
             document.getElementById('content').innerHTML = content;
-
 }
+
 
 
 // Calculate the remaining days to go to the trip (countdown)
@@ -165,6 +169,17 @@ export const subtractDates = (dateOne, dateTwo) => {
 
     const result = Math.ceil(difference / 86400000);
     return result;
+}
+
+// Calculate the remaining days to go to the trip (countdown)
+export const getCountdown = (startDate) => {
+    let todayDate = new Date();
+    const day = String(todayDate.getDate()).padStart(2, '0');
+    const month = String(todayDate.getMonth() + 1).padStart(2, '0');
+    const year = todayDate.getFullYear();
+    todayDate = year + '-' + month + '-' + day;
+    const daysLeft = subtractDates(todayDate, startDate);
+    return daysLeft;
 }
 
 export const updateUiWeather=(startDate,data)=>{
@@ -202,16 +217,4 @@ export const updateUiWeather=(startDate,data)=>{
         }
     }
     document.getElementById('temp').innerHTML = temp;
-}
-
-// Calculate the remaining days to go to the trip (countdown)
-export const getCountdown = (startDate) => {
-
-    let todayDate = new Date();
-    const day = String(todayDate.getDate()).padStart(2, '0');
-    const month = String(todayDate.getMonth() + 1).padStart(2, '0');
-    const year = todayDate.getFullYear();
-    todayDate = year + '-' + month + '-' + day;
-    const daysLeft = subtractDates(todayDate, startDate);
-    return daysLeft;
 }

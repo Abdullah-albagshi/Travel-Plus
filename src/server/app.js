@@ -2,8 +2,8 @@ const fetch=require('node-fetch');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-// Start up an instance of app
 
+// Start up an instance of app
 const app=express();
 
 // Here we are configuring express to use body-parser as middle-ware.
