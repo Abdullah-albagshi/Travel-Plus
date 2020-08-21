@@ -112,6 +112,5 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 
-src/server/.env
 
-config/config.env
+src/server/config/config.env
