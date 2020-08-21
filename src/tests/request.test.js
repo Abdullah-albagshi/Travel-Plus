@@ -1,4 +1,4 @@
-import { createTrip, removeTrip, updateUI, getCountdown, subtractDates } from '../client/js/request';
+import { createTrip, removeTrip, getCountdown } from '../client/js/request';
 
 describe('Testing the createTrip function', () => {
 
@@ -24,17 +24,6 @@ describe('Testing the removeTrip function', () => {
 
 });
 
-describe('Testing the updateUI function', () => {
-
-    test('Testing updateUI() , is it defined?', async () => {
-        expect(updateUI).toBeDefined()
-    })
-
-    test('Testing the updateUI(), is it function?', async () => {
-        expect(typeof updateUI).toBe('function');
-    });
-
-});
 
 
 describe('Testing the getCountdown function', () => {
@@ -53,17 +42,3 @@ describe('Testing the getCountdown function', () => {
 });
 
 
-describe('Testing the subtractDates function', () => {
-
-    test('Testing subtractDates() , is it defined?', async () => {
-        expect(subtractDates).toBeDefined()
-    })
-
-    test('Testing the subtractDates(), is it function?', async () => {
-        expect(typeof subtractDates).toBe('function');
-    });
-
-    test('Testing the subtractDates(), is it return number?', async () => {
-        expect(typeof getCountdown('2020-11-15', '2020-12-20')).toBe('number');
-    });
-});

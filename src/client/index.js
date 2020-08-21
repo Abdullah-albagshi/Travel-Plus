@@ -1,6 +1,7 @@
-import {createTrip, getCountdown, getFromPixabayAPI, 
-    getFromGeonamesAPI, getFromWeatherbit, updateUI, 
-    subtractDates, removeTrip, getFromCountryAPI} from '../client/js/request';
+import {
+    createTrip, getCountdown, getFromPixabayAPI,
+    getFromGeonamesAPI, getFromWeatherbit, removeTrip, getFromCountryAPI
+} from '../client/js/request';
 import '../client/styles/style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,8 +25,6 @@ export {
     getFromGeonamesAPI,
     getFromWeatherbit,
     getFromPixabayAPI,
-    updateUI,
-    subtractDates,
-    removeTrip,
     getFromCountryAPI,
+    removeTrip,
 }
