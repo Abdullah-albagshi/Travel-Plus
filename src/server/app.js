@@ -1,12 +1,12 @@
 const fetch = require('node-fetch');
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./config/db');
+const connectDB = require('../../config/db');
 const TravelModel = require('../../models/TravelModel');
 
 
 // Load config
-require('dotenv').config({ path: './config/config.env' });
+require('dotenv').config({ path: '../../config/config.env' });
 
 
 // Start up an instance of app
