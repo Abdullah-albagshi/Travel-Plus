@@ -1,5 +1,5 @@
 {
-  "name": "FEND-Capstone-Travel-App",
+  "name": "FEND-Capstone-Travel",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
@@ -42,8 +42,8 @@
   "scripts": {
     "start": "node src/server/app.js",
     "dev": "nodemon src/server/app.js",
-    "build-prod": "webpack --config webpack.prod.js --port 8082",
-    "build-dev": "webpack --config webpack.dev.js  --watch --port 8081",
+    "build": "webpack --config webpack.prod.js",
+    "build-dev": "webpack --config webpack.dev.js  --watch",
     "test": "jest"
   },
   "keywords": [],

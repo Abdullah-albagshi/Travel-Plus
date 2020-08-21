@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
                 test: /\.css$/,
@@ -40,6 +41,7 @@ module.exports = {
             protectWebpackAssets: false
         }),
         new WorkboxPlugin.GenerateSW(),
+        new MiniCssExtractPlugin({ filename: "main.css" }),
         new MomentLocalesPlugin()
     ]
 }

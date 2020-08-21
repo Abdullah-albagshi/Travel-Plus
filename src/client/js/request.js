@@ -1,3 +1,8 @@
+import getFromGeonamesAPI from './API/geonames';
+import getFromCountryAPI from './API/country';
+import getFromWeatherbit from './API/weatherbit';
+import getFromPixabayAPI from './API/pixabay';
+
 /* Global Variables */
 let geonames, weather, country, pix,
     duration, startDate, endtDate, destination;
@@ -5,87 +10,13 @@ let geonames, weather, country, pix,
 const moment = require('moment');
 
 
+
+
 // Spinner
 let spinner = document.getElementById('spinner');
 
 /* Asynchronous Functions */
 
-
-// Get request to Geonames API
-export const getFromGeonamesAPI = async () => {
-    try {
-        const request = await fetch(`http://localhost:8080/geonames/${destination}`);
-        const data = await request.json();
-        const geonamesData = data.geonames[0];
-        const geo = {
-            country: geonamesData.countryName,
-            latitude: geonamesData.lat,
-            longitude: geonamesData.lng
-        };
-        return geo;
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// Get request to Pixabay API
-export const getFromPixabayAPI = async () => {
-
-    try {
-        const request = await fetch(`http://localhost:8080/pixabay/${destination}`);
-
-        const data = await request.json();
-        return data;
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// Get request to Weatherbit API
-export const getFromWeatherbit = async () => {
-
-    const response = await fetch(`http://localhost:8080/weatherbit`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(geonames)
-    });
-    try {
-        const data = await response.json();
-        const weatherData = data.data;
-        return weatherData;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-// Get request to  Country API
-export const getFromCountryAPI = async () => {
-
-    const country = geonames.country;
-
-    const countryAPI = 'https://restcountries.eu/rest/v2/name/';
-    const request = await fetch(countryAPI + country);
-    try {
-        const data = await request.json();
-        const countryData = data[0];
-        const result = {
-            name: countryData.name,
-            capital: countryData.capital,
-            currency: countryData.currencies[0].code,
-            language: countryData.languages[0].name,
-            population: countryData.population,
-            region: countryData.region,
-            timezone: countryData.timezones[0]
-        };
-        return result;
-    } catch (error) {
-        console.log(error);
-    }
-};
 
 
 
@@ -186,7 +117,7 @@ export const updateUiCountry = () => {
                         <br>
                         <strong>Country information:</strong>
                         <br>
-                        The counrty you want to visit is ${country.name}, and the capital city of ${country.name} is ${country.capital}. ${country.name} is located in ${country.region} region, and the population is estimated at ${country.population} people. The main language in ${country.name} is ${country.language} language, and ${country.currency} is the official currency of ${country.name}. ${country.timezone} is the time zone used in ${country.name}.`;
+                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} region, and the population is estimated at ${country.population} people. The main language is ${country.language} language, and ${country.currency} is the official currency of ${country.name}. ${country.timezone} is the time zone used in ${country.name}.`;
     document.getElementById('countryInfo').innerHTML = countryInfo;
 
     const content = `<img src=${pix.hits[0].webformatURL} alt=${destination}>
@@ -196,7 +127,7 @@ export const updateUiCountry = () => {
 };
 
 export const updateUiWeather = () => {
-    let a = new Date(startDate).getTime();
+    let date = new Date(startDate).getTime();
     let counter = 1;
     let temp = `
     <table class="table table-striped" style="text-align:center;">
@@ -214,13 +145,13 @@ export const updateUiWeather = () => {
     // Find the correct date from 16 date forcast array
     for (let i = 0; i < weather.length; i++) {
 
-        let b = new Date(weather[i].datetime).getTime();
-        if (b >= a) {
+        let weatherDate = new Date(weather[i].datetime).getTime();
+        if (weatherDate >= date) {
             temp += `<tr>
                     <th scope="row">${counter}</th>
                     <td>${weather[i].temp}&#8451;</td>
                     </tr> `;
-            if (counter == 5) {
+            if (counter == duration || counter == 10 || duration == 0) {
                 temp += ` </tbody>
                         </table>`  ;
                 break;
