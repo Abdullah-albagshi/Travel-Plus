@@ -1,7 +1,4 @@
-import {
-    createTrip, getFromPixabayAPI,
-    getFromGeonamesAPI, getFromWeatherbit, removeTrip, getFromCountryAPI
-} from '../client/js/request';
+import { createTrip, removeTrip } from '../client/js/request';
 import '../client/styles/style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,12 +16,3 @@ create.addEventListener('click', createTrip);
 const remove = document.getElementById('remove');
 remove.addEventListener('click', removeTrip);
 
-
-export {
-    createTrip,
-    getFromGeonamesAPI,
-    getFromWeatherbit,
-    getFromPixabayAPI,
-    getFromCountryAPI,
-    removeTrip,
-};

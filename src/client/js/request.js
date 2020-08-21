@@ -10,14 +10,8 @@ let geonames, weather, country, pix,
 const moment = require('moment');
 
 
-
-
 // Spinner
 let spinner = document.getElementById('spinner');
-
-/* Asynchronous Functions */
-
-
 
 
 /* Main Functions */
@@ -50,7 +44,6 @@ export const createTrip = async () => {
     else {
         document.getElementById('date-alert').style.display = 'none';
     }
-
 
 
     spinner.style.visibility = 'visible';
@@ -86,7 +79,7 @@ export const removeTrip = () => {
 export const saveTrip = async (travelData) => {
     try {
         const travelData = { geonames, weather, country, pix };
-        await fetch(`http://localhost:8080/save`, {
+        await fetch(`/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -97,10 +90,6 @@ export const saveTrip = async (travelData) => {
         console.log(error);
     }
 };
-
-
-
-
 
 
 // :: UPDATE UI ::

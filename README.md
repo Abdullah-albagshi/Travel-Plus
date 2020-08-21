@@ -29,7 +29,7 @@ In most cases of personal projects, it is very common to pull basic data from an
 
 2. Install dependencies
 ```
-npm install --save-dev
+npm install
 ```
 3. Start the server
 ```
@@ -39,9 +39,9 @@ npm start
 ```
 npm run build-dev
 ```
-4. or 
+ or 
 ```
-npm run build-prod
+npm run build
 ```
 5. Test with Jest
 ```
