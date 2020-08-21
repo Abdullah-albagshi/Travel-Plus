@@ -24,6 +24,9 @@
 
     <form>
       <div class="form-group">
+        <div id="empty" style="display: none;" class="alert alert-danger" role="alert">
+          Please all the fields
+        </div>
         <div class="form-row">
           <div class="col-12">
             <label for="destination">Destination: </label>
@@ -82,7 +85,6 @@
       // Use the window load event to keep the page load performance
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/service-worker.js');
-        navigator.serviceWorker.register('dist/service-worker.js');
       });
     }
   </script>

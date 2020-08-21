@@ -27,4 +27,4 @@ export {
     getFromPixabayAPI,
     getFromCountryAPI,
     removeTrip,
-}
+};

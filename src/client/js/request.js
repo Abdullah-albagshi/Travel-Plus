@@ -52,9 +52,7 @@ export const getFromWeatherbit = async () => {
     });
     try {
         const data = await response.json();
-
         const weatherData = data.data;
-
         return weatherData;
     } catch (error) {
         console.log(error);
@@ -96,8 +94,17 @@ export const createTrip = async () => {
     // Get the user input from the dom
     startDate = document.getElementById('startDate').value;
     endtDate = document.getElementById('endDate').value;
-    duration = subtractDates(startDate, endtDate);
     destination = document.getElementById('destination').value;
+
+    if (!startDate || !endtDate || !destination) {
+        document.getElementById('empty').style.display = 'block';
+        return;
+    }
+    else {
+        document.getElementById('empty').style.display = 'none';
+    }
+
+    duration = subtractDates(startDate, endtDate);
 
     spinner.innerHTML = 'Loading ....';
 
@@ -156,7 +163,7 @@ export const countdown = (startDate) => {
 
     const daysLeft = subtractDates(todayDate, startDate);
     return daysLeft;
-}
+};
 
 // Calculate the difference between two dates
 export const subtractDates = (dateOne, dateTwo) => {

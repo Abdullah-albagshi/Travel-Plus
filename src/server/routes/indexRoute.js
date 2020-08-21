@@ -73,18 +73,27 @@ router.post('/weatherbit', async (req, res) => {
 router.post('/save', async (req, res) => {
 
   try {
-    const data = req.body;
+    let { geonames, weather, country, pix } = req.body;
+
+    // Convert the json to string to store it in DB
+    geonames = JSON.stringify(geonames);
+    weather = JSON.stringify(weather);
+    country = JSON.stringify(country);
+    pix = JSON.stringify(pix);
+
     // Add Travel to the DB
-    const newTravel = await TravelModel.create(data);
+    await TravelModel.create({ geonames, weather, country, pix });
+
+    res.status(200).json({
+      success: true,
+    });
   }
   catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
     });
   }
-  res.status(200).json({
-    success: true,
-  });
 });
 
 

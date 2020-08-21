@@ -1,6 +1,6 @@
 import { app } from '../server/app';
 const request = require('supertest');
-const test_destination='saudi';
+const test_destination = 'saudi';
 
 
 describe("Test Get Endpoints", () => {
