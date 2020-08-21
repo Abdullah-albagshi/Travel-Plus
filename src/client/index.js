@@ -1,9 +1,10 @@
 import {
-    createTrip, getCountdown, getFromPixabayAPI,
+    createTrip, getFromPixabayAPI,
     getFromGeonamesAPI, getFromWeatherbit, removeTrip, getFromCountryAPI
 } from '../client/js/request';
 import '../client/styles/style.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -21,7 +22,6 @@ remove.addEventListener('click', removeTrip);
 
 export {
     createTrip,
-    getCountdown,
     getFromGeonamesAPI,
     getFromWeatherbit,
     getFromPixabayAPI,

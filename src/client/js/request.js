@@ -2,7 +2,10 @@
 let geonames, weather, country, pix,
     duration, startDate, endtDate, destination;
 
-// hold the value of the input element that entered by the user
+const moment = require('moment');
+
+
+// Spinner
 let spinner = document.getElementById('spinner');
 
 /* Asynchronous Functions */
@@ -92,31 +95,44 @@ export const getFromCountryAPI = async () => {
 export const createTrip = async () => {
 
     // Get the user input from the dom
-    startDate = document.getElementById('startDate').value;
-    endtDate = document.getElementById('endDate').value;
+    startDate = moment(document.getElementById('startDate').value);
+    endtDate = moment(document.getElementById('endDate').value);
     destination = document.getElementById('destination').value;
 
     if (!startDate || !endtDate || !destination) {
-        document.getElementById('empty').style.display = 'block';
+        document.getElementById('empty-alert').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
     else {
-        document.getElementById('empty').style.display = 'none';
+        document.getElementById('empty-alert').style.display = 'none';
     }
 
-    duration = subtractDates(startDate, endtDate);
 
-    spinner.innerHTML = 'Loading ....';
+    duration = endtDate.diff(startDate, 'days');
 
+    if (duration < 0) {
+        document.getElementById('date-alert').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    else {
+        document.getElementById('date-alert').style.display = 'none';
+    }
+
+
+
+    spinner.style.visibility = 'visible';
     // Call the apis 
     geonames = await getFromGeonamesAPI();
     weather = await getFromWeatherbit();
     country = await getFromCountryAPI();
     pix = await getFromPixabayAPI();
-    spinner.innerHTML = '';
 
-    const travelData = { geonames, weather, country, pix };
-    saveTrip(travelData);
+    spinner.style.visibility = 'hidden';
+
+    // Save trip in the DB
+    saveTrip();
 
     // Update the ui
     updateUiDuration();
@@ -125,7 +141,7 @@ export const createTrip = async () => {
 
 
 
-}
+};
 
 // Remove the trip from the User Interface
 export const removeTrip = () => {
@@ -138,6 +154,7 @@ export const removeTrip = () => {
 // Remove the trip from the User Interface
 export const saveTrip = async (travelData) => {
     try {
+        const travelData = { geonames, weather, country, pix };
         await fetch(`http://localhost:8080/save`, {
             method: 'POST',
             headers: {
@@ -152,38 +169,9 @@ export const saveTrip = async (travelData) => {
 
 
 
-// Calculate the remaining days to go to the trip (countdown)
-export const countdown = (startDate) => {
 
-    let todayDate = new Date();
-    const day = String(todayDate.getDate()).padStart(2, '0');
-    const month = String(todayDate.getMonth() + 1).padStart(2, '0');
-    const year = todayDate.getFullYear();
-    todayDate = year + '-' + month + '-' + day;
 
-    const daysLeft = subtractDates(todayDate, startDate);
-    return daysLeft;
-};
 
-// Calculate the difference between two dates
-export const subtractDates = (dateOne, dateTwo) => {
-    const d1 = Date.parse(dateOne);
-    const d2 = Date.parse(dateTwo);
-    const difference = d2 - d1;
-    const result = Math.ceil(difference / 86400000);
-    return result;
-};
-
-// Calculate the remaining days to go to the trip (countdown)
-export const getCountdown = () => {
-    let todayDate = new Date();
-    const day = String(todayDate.getDate()).padStart(2, '0');
-    const month = String(todayDate.getMonth() + 1).padStart(2, '0');
-    const year = todayDate.getFullYear();
-    todayDate = year + '-' + month + '-' + day;
-    const daysLeft = subtractDates(todayDate, startDate);
-    return daysLeft;
-};
 // :: UPDATE UI ::
 
 export const updateUiDuration = () => {
@@ -193,7 +181,7 @@ export const updateUiDuration = () => {
 
 
 export const updateUiCountry = () => {
-    const countdown = getCountdown(startDate);
+    const countdown = startDate.diff(moment(Date.now()), 'days');
     const countryInfo = `<h3>${countdown} day(s) to go!</h3>
                         <br>
                         <strong>Country information:</strong>
