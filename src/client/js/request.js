@@ -49,7 +49,17 @@ export const createTrip = async () => {
     spinner.style.visibility = 'visible';
     // Call the apis 
     geonames = await getGeonamesAPI(destination);
-    console.log(geonames);
+
+
+    if (!geonames) {
+        document.getElementById('country-alert').style.display = 'block';
+        spinner.style.visibility = 'hidden';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    else {
+        document.getElementById('country-alert').style.display = 'none';
+    }
     weather = await getWeatherbit(geonames);
     country = await getCountryAPI(geonames);
     pix = await getPixabayAPI(destination);
