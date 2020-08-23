@@ -1,5 +1,5 @@
 // Get request to Pixabay API
-export const getFromPixabayAPI = async () => {
+export const getPixabayAPI = async (destination) => {
 
     try {
         const request = await fetch(`/pixabay/${destination}`);

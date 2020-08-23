@@ -1,5 +1,5 @@
 // Get request to Geonames API
-export const getFromGeonamesAPI = async () => {
+export const getGeonamesAPI = async (destination) => {
     try {
         const request = await fetch(`/geonames/${destination}`);
         const data = await request.json();

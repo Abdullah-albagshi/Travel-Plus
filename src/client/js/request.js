@@ -1,7 +1,7 @@
-import getFromGeonamesAPI from './API/geonames';
-import getFromCountryAPI from './API/country';
-import getFromWeatherbit from './API/weatherbit';
-import getFromPixabayAPI from './API/pixabay';
+import { getGeonamesAPI } from './API/geonames';
+import { getCountryAPI } from './API/country';
+import { getWeatherbit } from './API/weatherbit';
+import { getPixabayAPI } from './API/pixabay';
 
 /* Global Variables */
 let geonames, weather, country, pix,
@@ -48,10 +48,11 @@ export const createTrip = async () => {
 
     spinner.style.visibility = 'visible';
     // Call the apis 
-    geonames = await getFromGeonamesAPI();
-    weather = await getFromWeatherbit();
-    country = await getFromCountryAPI();
-    pix = await getFromPixabayAPI();
+    geonames = await getGeonamesAPI(destination);
+    console.log(geonames);
+    weather = await getWeatherbit(geonames);
+    country = await getCountryAPI(geonames);
+    pix = await getPixabayAPI(destination);
 
     spinner.style.visibility = 'hidden';
 
@@ -62,7 +63,6 @@ export const createTrip = async () => {
     updateUiDuration();
     updateUiWeather();
     updateUiCountry();
-
 
 
 };
@@ -106,7 +106,8 @@ export const updateUiCountry = () => {
                         <br>
                         <strong>Country information:</strong>
                         <br>
-                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} region, and the population is estimated at ${country.population} people. The main language is ${country.language} language, and ${country.currency} is the official currency of ${country.name}. ${country.timezone} is the time zone used in ${country.name}.`;
+                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} region, and the population is estimated at ${country.population} people. The main language is ${country.language} language, and ${country.currency} is the official currency.
+                        ${country.timezone} is the time zone used in ${country.name}.`;
     document.getElementById('countryInfo').innerHTML = countryInfo;
 
     const content = `<img src=${pix.hits[0].webformatURL} alt=${destination}>
@@ -133,7 +134,6 @@ export const updateUiWeather = () => {
 
     // Find the correct date from 16 date forcast array
     for (let i = 0; i < weather.length; i++) {
-
         let weatherDate = new Date(weather[i].datetime).getTime();
         if (weatherDate >= date) {
             temp += `<tr>

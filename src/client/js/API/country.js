@@ -1,5 +1,5 @@
 // Get request to  Country API
-export const getFromCountryAPI = async () => {
+export const getCountryAPI = async (geonames) => {
 
     const country = geonames.country;
 

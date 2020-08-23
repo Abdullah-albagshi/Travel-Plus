@@ -1,5 +1,5 @@
 // Get request to Weatherbit API
-export const getFromWeatherbit = async () => {
+export const getWeatherbit = async (geonames) => {
 
     const response = await fetch(`/weatherbit`, {
         method: 'POST',
