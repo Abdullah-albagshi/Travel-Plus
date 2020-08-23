@@ -14,38 +14,25 @@ const moment = require('moment');
 let spinner = document.getElementById('spinner');
 
 
+
 /* Main Functions */
 
 // Create trip according to the user trip data, then invoke the User Interface
-export const createTrip = async () => {
+export const createTrip = async (e) => {
+
+    e.preventDefault();
 
     // Get the user input from the dom
     startDate = moment(document.getElementById('startDate').value);
     endtDate = moment(document.getElementById('endDate').value);
     destination = document.getElementById('destination').value;
 
-    if (!startDate || !endtDate || !destination) {
-        document.getElementById('empty-alert').style.display = 'block';
+    if (!checkAlert()) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
-    else {
-        document.getElementById('empty-alert').style.display = 'none';
-    }
 
-
-    duration = endtDate.diff(startDate, 'days');
-
-    if (duration < 0) {
-        document.getElementById('date-alert').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-    }
-    else {
-        document.getElementById('date-alert').style.display = 'none';
-    }
-
-    removeTrip();
+    await removeTrip();
 
     spinner.style.visibility = 'visible';
 
@@ -62,6 +49,7 @@ export const createTrip = async () => {
     else {
         document.getElementById('country-alert').style.display = 'none';
     }
+
     weather = await getWeatherbit(geonames);
     country = await getCountryAPI(geonames);
     pix = await getPixabayAPI(destination);
@@ -79,8 +67,9 @@ export const createTrip = async () => {
 
 };
 
+
 // Remove the trip from the User Interface
-export const removeTrip = () => {
+export const removeTrip = async () => {
     document.getElementById('temp').innerHTML = '';
     document.getElementById('duration').innerHTML = '';
     document.getElementById('content').innerHTML = '';
@@ -88,7 +77,7 @@ export const removeTrip = () => {
 };
 
 // Remove the trip from the User Interface
-export const saveTrip = async (travelData) => {
+export const saveTrip = async () => {
     try {
         const travelData = { geonames, weather, country, pix };
         await fetch(`/save`, {
@@ -101,6 +90,39 @@ export const saveTrip = async (travelData) => {
     } catch (error) {
         console.log(error);
     }
+};
+
+
+export const checkAlert = () => {
+
+    if (!startDate || !endtDate || !destination) {
+        document.getElementById('empty-alert').style.display = 'block';
+        return false;
+    }
+    else {
+        document.getElementById('empty-alert').style.display = 'none';
+    }
+
+    if (startDate.isBefore(Date.now())) {
+        document.getElementById('start-alert').style.display = 'block';
+        return false;
+    }
+    else {
+        document.getElementById('start-alert').style.display = 'none';
+    }
+
+    duration = endtDate.diff(startDate, 'days');
+
+    if (duration < 0) {
+        document.getElementById('date-alert').style.display = 'block';
+        return false;
+    }
+    else {
+        document.getElementById('date-alert').style.display = 'none';
+    }
+
+    return true;
+
 };
 
 
