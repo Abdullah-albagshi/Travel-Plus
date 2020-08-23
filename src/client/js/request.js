@@ -45,8 +45,10 @@ export const createTrip = async () => {
         document.getElementById('date-alert').style.display = 'none';
     }
 
+    removeTrip();
 
     spinner.style.visibility = 'visible';
+
     // Call the apis 
     geonames = await getGeonamesAPI(destination);
 
