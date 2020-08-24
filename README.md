@@ -1,6 +1,6 @@
 # Udacity Front End Development Nonodegree 
 
-# FEND-Capstone-Travel-App
+## FEND-Capstone-Travel-App
 
 
 ## About the Project
@@ -41,7 +41,7 @@ npm start
 ```
 npm run build-dev
 ```
- or 
+* or 
 ```
 npm run build
 ```
@@ -53,7 +53,7 @@ npm run test
 ## Environment variables
 
 * You need first to rename the file located at `src/server/config`
-    from `config.env .env`   ->   `config.env`
+    from `config.env.env`   ->   `config.env`
 
 * Then you need to replace the sample API keys with real once
 
@@ -75,6 +75,6 @@ To test the application, run
 npm run test
 ```
 
-## Application Hosted
+# Application Hosted
 
-This project already has been hosted using heroku at : https://capstone-travel.herokuapp.com/
+This project already has been hosted using heroku at : https://capstone-travel.herokuapp.com
