@@ -13,6 +13,8 @@ In most cases of personal projects, it is very common to pull basic data from an
 * [WeatherBit API](https://www.weatherbit.io/) - Weather API for current and future weather data
 * [Pixabay API](https://pixabay.com/api/docs/) - RESTful interface for searching and retrieving free images and videos
 
+* [Country API](https://restcountries.eu/) - RESTful Api for countries names and details
+
 ## Development strategy
 
 1. Setup Webpack Development Enviroment: For this, I have created a gist to follow along.
@@ -48,6 +50,12 @@ npm run build
 npm run test
 ```
 
+## Environment variables
+
+* You need first to rename the file located at src/server/config/config .env .env
+
+* Then you need to replace the sample API keys with real once
+
 ## Built With
 
 * [Bootstrap](https://getbootstrap.com/) - The CSS framework used 
@@ -65,3 +73,7 @@ To test the application, run
 ```
 npm run test
 ```
+
+## Application Hosted
+
+This project already has been hosted using heroku at : https://capstone-travel.herokuapp.com/
