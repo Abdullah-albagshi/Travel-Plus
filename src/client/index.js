@@ -1,7 +1,10 @@
-import { createTrip, removeTrip } from '../client/js/request';
-import '../client/styles/style.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './css/main.scss';
+import './css/all.css';
+import './css/bootstrap.min.css';
+import './css/style.css';
+import './js/request';
+import  './js/jquery-1.12.1.min';
+import './img/favicon.png';
 
 
 

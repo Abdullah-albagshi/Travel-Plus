@@ -81,7 +81,7 @@ export const removeTrip = async () => {
     document.getElementById('countryInfo').innerHTML = '';
 };
 
-// Remove the trip from the User Interface
+// Save the trip in mongodb 
 export const saveTrip = async () => {
     try {
         const travelData = { geonames, weather, country, pix };
@@ -146,7 +146,9 @@ export const updateUiCountry = () => {
                         <br>
                         <strong>Country information:</strong>
                         <br>
-                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} region, and the population is estimated at ${country.population} people. The main language is ${country.language} language, and ${country.currency} is the official currency.
+                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} 
+                        region, and the population is estimated at ${country.population} people. 
+                        The main language is ${country.language} language, and ${country.currency} is the official currency.
                         ${country.timezone} is the time zone used in ${country.name}.`;
     document.getElementById('countryInfo').innerHTML = countryInfo;
 
@@ -158,7 +160,7 @@ export const updateUiCountry = () => {
 
 export const updateUiWeather = () => {
     let date = new Date(startDate).getTime();
-    let counter = 1;
+    let i = 1;
     let temp = `
     <table class="table table-striped" style="text-align:center;">
     <thead>
@@ -172,21 +174,23 @@ export const updateUiWeather = () => {
     </thead>
     <tbody>`;
 
-    // Find the correct date from 16 date forcast array
-    for (let i = 0; i < weather.length; i++) {
-        let weatherDate = new Date(weather[i].datetime).getTime();
+       // Find the correct date from 16 date forcast array
+    weather.foreach(w => {
+        let weatherDate = new Date(w[i].datetime).getTime();
         if (weatherDate >= date) {
             temp += `<tr>
-                    <th scope="row">${counter}</th>
-                    <td>${weather[i].temp}&#8451;</td>
+                    <th scope="row">${i}</th>
+                    <td>${w[i].temp}&#8451;</td>
                     </tr> `;
-            if (counter == duration || counter == 10 || duration == 0) {
+            if (i == duration || i == 10 || duration == 0) {
                 temp += ` </tbody>
                         </table>`  ;
-                break;
+                return;
             }
-            counter++;
+            i++;
         }
-    }
+    });
+    
+
     document.getElementById('temp').innerHTML = temp;
 };

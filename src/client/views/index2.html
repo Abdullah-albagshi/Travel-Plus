@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>travel</title>
+    <link rel="icon" href="img/favicon.png">
+</head>
+
+<body>
+
+    <!-- banner part start-->
+    <section class="banner_part">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="banner_text">
+                        <div class="banner_text_iner">
+                            <h5>Travel</h5>
+                            <h5>Enter your destination and the dates of your trip, then get weather forecast, language, currency,
+                                time zone, and much more information about your destination. Try it by your self!</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner part start-->
+
+    <!-- banner part start-->
+    <section class="search_your_country">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="search_form form-group">
+                        <div id="empty-alert" style="display: none;" class="alert alert-danger" role="alert">
+                            Please all the fields
+                          </div>
+                          <div id="start-alert" style="display: none;" class="alert alert-danger" role="alert">
+                            The start date can't be less than today date
+                          </div>
+                          <div id="date-alert" style="display: none;" class="alert alert-danger" role="alert">
+                            The end date can't be less than start date
+                          </div>
+                          <div id="country-alert" style="display: none;" class="alert alert-danger" role="alert">
+                            You entered a wrong country name
+                          </div>
+                            <div class="form-row">
+                                <div class="col">                         
+                                        <label for="destination">Destination: </label>
+                                        <select class="form-control" type="text" id="destination" autocomplete="off">
+                                            <option value="" disabled selected>Enter your destination here</option>
+                                          </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                  <label for="startDate">Start Date: </label>
+                                  <input class="form-control" type="date" id="startDate" placeholder="enter start date here">
+                                </div>
+                                <div class="col">
+                                    <label for="endDate">End Date: </label>
+                                    <input class="form-control" type="date" id="endDate" placeholder="enter end date here">
+                                  </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                        </div>
+                        <br>
+                        <div class="form-row">
+                        <div class="col-12">                       
+                            <button id="create" type="button" class="btn search_btn"> Create trip </button>
+                            <button id="remove" type="button" class="btn btn-danger"> Remove trip </button>
+                            <button id="print" type="button" class="btn btn-dark"> Print </button>
+                          </div>                
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+            </section>
+            <footer>
+                    <hr>
+                    <div>
+                        <div class="text-center">
+                            <div class="copyright_text">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright ©<script>document.write(new Date().getFullYear());</script>2020 All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+    <!--::footer_part end::-->
+</body>
+
+</html>
