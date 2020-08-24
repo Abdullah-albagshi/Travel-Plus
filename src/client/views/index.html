@@ -38,7 +38,9 @@
       <div class="form-row">
         <div class="col-12">
           <label for="destination">Destination: </label>
-          <input class="form-control" type="text" id="destination" placeholder="Enter your destination here">
+          <select class="form-control selectpicker" type="text" id="destination" autocomplete="off">
+            <option value="" disabled selected>Enter your destination here</option>
+          </select>
         </div>
       </div>
       <div class="form-row">
@@ -62,15 +64,15 @@
 
       </div>
     </div>
+    <div class="d-flex justify-content-center">
+      <div id="spinner" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
 
     <div class="container" id="result">
       <div class="row">
         <div class="col-12">
-          <div class="d-flex justify-content-center">
-            <div id="spinner" class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
         </div>
       </div>
       <div class="row">
@@ -99,6 +101,7 @@
       });
     }
   </script>
+
 </body>
 
 </html>

@@ -5,13 +5,16 @@ import { getPixabayAPI } from './API/pixabay';
 
 /* Global Variables */
 let geonames, weather, country, pix,
-    duration, startDate, endtDate, destination;
+    duration, startDate, endtDate,
+    destination, countdown;
 
 const moment = require('moment');
 
 
 // Spinner
 let spinner = document.getElementById('spinner');
+
+
 
 
 
@@ -68,6 +71,8 @@ export const createTrip = async (e) => {
 };
 
 
+
+
 // Remove the trip from the User Interface
 export const removeTrip = async () => {
     document.getElementById('temp').innerHTML = '';
@@ -103,7 +108,8 @@ export const checkAlert = () => {
         document.getElementById('empty-alert').style.display = 'none';
     }
 
-    if (startDate.isBefore(Date.now())) {
+    countdown = startDate.diff(moment(Date.now()), 'days');
+    if (countdown < 0) {
         document.getElementById('start-alert').style.display = 'block';
         return false;
     }
@@ -135,7 +141,7 @@ export const updateUiDuration = () => {
 
 
 export const updateUiCountry = () => {
-    const countdown = startDate.diff(moment(Date.now()), 'days');
+
     const countryInfo = `<h3>${countdown} day(s) to go!</h3>
                         <br>
                         <strong>Country information:</strong>
