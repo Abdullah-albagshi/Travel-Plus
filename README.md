@@ -52,7 +52,8 @@ npm run test
 
 ## Environment variables
 
-* You need first to rename the file located at src/server/config/config .env .env
+* You need first to rename the file located at `src/server/config`
+    from `config.env .env`   ->   `config.env`
 
 * Then you need to replace the sample API keys with real once
 
