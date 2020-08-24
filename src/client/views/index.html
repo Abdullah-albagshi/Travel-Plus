@@ -22,48 +22,46 @@
         time zone, and much more information about your destination. Try it by your self! </p>
     </div>
 
-    <form>
-      <div class="form-group">
-        <div id="empty-alert" style="display: none;" class="alert alert-danger" role="alert">
-          Please all the fields
-        </div>
-        <div id="start-alert" style="display: none;" class="alert alert-danger" role="alert">
-          The start date can't be less than today date
-        </div>
-        <div id="date-alert" style="display: none;" class="alert alert-danger" role="alert">
-          The end date can't be less than start date
-        </div>
-        <div id="country-alert" style="display: none;" class="alert alert-danger" role="alert">
-          You entered a wrong country name
-        </div>
-        <div class="form-row">
-          <div class="col-12">
-            <label for="destination">Destination: </label>
-            <input class="form-control" type="text" id="destination" placeholder="Enter your destination here">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col">
-            <label for="startDate">Start Date: </label>
-            <input class="form-control" type="date" id="startDate" placeholder="enter start date here">
-          </div>
-
-          <div class="col">
-            <label for="endDate">End Date: </label>
-            <input class="form-control" type="date" id="endDate" placeholder="enter end date here">
-          </div>
-        </div>
-        <br>
-        <div class="form-row">
-          <div class="col-12">
-            <button id="create" type="button" class="btn btn-primary"> Create trip </button>
-            <button id="remove" type="button" class="btn btn-danger"> Remove trip </button>
-            <button id="print" type="button" class="btn btn-dark"> Print </button>
-          </div>
-
+    <div class="form-group">
+      <div id="empty-alert" style="display: none;" class="alert alert-danger" role="alert">
+        Please all the fields
+      </div>
+      <div id="start-alert" style="display: none;" class="alert alert-danger" role="alert">
+        The start date can't be less than today date
+      </div>
+      <div id="date-alert" style="display: none;" class="alert alert-danger" role="alert">
+        The end date can't be less than start date
+      </div>
+      <div id="country-alert" style="display: none;" class="alert alert-danger" role="alert">
+        You entered a wrong country name
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <label for="destination">Destination: </label>
+          <input class="form-control" type="text" id="destination" placeholder="Enter your destination here">
         </div>
       </div>
-    </form>
+      <div class="form-row">
+        <div class="col">
+          <label for="startDate">Start Date: </label>
+          <input class="form-control" type="date" id="startDate" placeholder="enter start date here">
+        </div>
+
+        <div class="col">
+          <label for="endDate">End Date: </label>
+          <input class="form-control" type="date" id="endDate" placeholder="enter end date here">
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-12">
+          <button id="create" type="button" class="btn btn-primary"> Create trip </button>
+          <button id="remove" type="button" class="btn btn-danger"> Remove trip </button>
+          <button id="print" type="button" class="btn btn-dark"> Print </button>
+        </div>
+
+      </div>
+    </div>
 
     <div class="container" id="result">
       <div class="row">
