@@ -1,6 +1,6 @@
 # Udacity Front End Development Nonodegree 
 
-## FEND-Capstone-Travel-App
+## Travel Plus
 
 
 ## About the Project
@@ -77,4 +77,4 @@ npm run test
 
 # Application Hosted
 
-This project already has been hosted using heroku at : https://capstone-travel.herokuapp.com
+This project already has been hosted using heroku at : https://travel--plus.herokuapp.com
