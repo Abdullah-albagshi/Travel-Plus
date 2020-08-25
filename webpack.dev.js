@@ -23,9 +23,32 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
-            }
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',   
+                          options: {
+                            name: '[name].[ext]',
+                            outputPath: 'img/'
+                          } 
+                    },    
+                ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                {
+                    loader: 'file-loader',   
+                      options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                      }            
+                },
         ]
-    },
+    }
+]},
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",

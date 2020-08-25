@@ -1,6 +1,12 @@
+*{
+    font-family: 'Poppins', Times, serif;
+}
+
+body{
+    background-color:white !important;
+}
 label{
     margin-top: 15px;
-    font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     font-size: larger;
 }
@@ -11,6 +17,8 @@ img{
     border-radius: 5px;
 }
 
+
+
 #spinner{
     visibility: hidden;
 }
@@ -18,7 +26,9 @@ img{
 .title{
     font-weight: bold;
     font-size: larger;
+    font-family: 'Poppins', Times, serif;
 }
+
 
 #header {
     text-align: center;
@@ -34,14 +44,16 @@ img{
 }
 
 #result{
-    background-color: #e9ecef;
+    background-color:#ffff ;
     padding: 15px;
-    margin: 15px 0;
+    width: 100%;
     border-radius: 5px;
     font-family: 'Times New Roman', Times, serif;
+   margin-top: 200px;
 }
 
 #footer{
+    background-color:#ffff ;
     width: 100%;
     text-align: center;
 }

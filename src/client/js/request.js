@@ -23,15 +23,12 @@ let spinner = document.getElementById('spinner');
 // Create trip according to the user trip data, then invoke the User Interface
 export const createTrip = async (e) => {
 
-    e.preventDefault();
-
     // Get the user input from the dom
     startDate = moment(document.getElementById('startDate').value);
     endtDate = moment(document.getElementById('endDate').value);
     destination = document.getElementById('destination').value;
 
     if (!checkAlert()) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
 
@@ -46,7 +43,6 @@ export const createTrip = async (e) => {
     if (!geonames) {
         document.getElementById('country-alert').style.display = 'block';
         spinner.style.visibility = 'hidden';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
     else {
@@ -81,7 +77,7 @@ export const removeTrip = async () => {
     document.getElementById('countryInfo').innerHTML = '';
 };
 
-// Remove the trip from the User Interface
+// Save the trip in mongodb 
 export const saveTrip = async () => {
     try {
         const travelData = { geonames, weather, country, pix };
@@ -146,7 +142,9 @@ export const updateUiCountry = () => {
                         <br>
                         <strong>Country information:</strong>
                         <br>
-                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} region, and the population is estimated at ${country.population} people. The main language is ${country.language} language, and ${country.currency} is the official currency.
+                        The counrty you want to visit is ${country.name}, and the capital is ${country.capital}. ${country.name} is located in ${country.region} 
+                        region, and the population is estimated at ${country.population} people. 
+                        The main language is ${country.language} language, and ${country.currency} is the official currency.
                         ${country.timezone} is the time zone used in ${country.name}.`;
     document.getElementById('countryInfo').innerHTML = countryInfo;
 
@@ -171,7 +169,6 @@ export const updateUiWeather = () => {
       </tr>
     </thead>
     <tbody>`;
-
     // Find the correct date from 16 date forcast array
     for (let i = 0; i < weather.length; i++) {
         let weatherDate = new Date(weather[i].datetime).getTime();
@@ -188,5 +185,7 @@ export const updateUiWeather = () => {
             counter++;
         }
     }
+    
+
     document.getElementById('temp').innerHTML = temp;
 };
