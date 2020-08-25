@@ -2,7 +2,7 @@ import './css/main.scss';
 import './css/all.css';
 import './css/bootstrap.min.css';
 import './css/style.css';
-import './js/request';
+import {createTrip,removeTrip} from './js/request';
 import  './js/jquery-1.12.1.min';
 import './img/favicon.png';
 

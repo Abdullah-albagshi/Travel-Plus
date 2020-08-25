@@ -23,15 +23,12 @@ let spinner = document.getElementById('spinner');
 // Create trip according to the user trip data, then invoke the User Interface
 export const createTrip = async (e) => {
 
-    e.preventDefault();
-
     // Get the user input from the dom
     startDate = moment(document.getElementById('startDate').value);
     endtDate = moment(document.getElementById('endDate').value);
     destination = document.getElementById('destination').value;
 
     if (!checkAlert()) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
 
@@ -46,7 +43,6 @@ export const createTrip = async (e) => {
     if (!geonames) {
         document.getElementById('country-alert').style.display = 'block';
         spinner.style.visibility = 'hidden';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
     else {
@@ -160,7 +156,7 @@ export const updateUiCountry = () => {
 
 export const updateUiWeather = () => {
     let date = new Date(startDate).getTime();
-    let i = 1;
+    let counter = 1;
     let temp = `
     <table class="table table-striped" style="text-align:center;">
     <thead>
@@ -173,23 +169,22 @@ export const updateUiWeather = () => {
       </tr>
     </thead>
     <tbody>`;
-
-       // Find the correct date from 16 date forcast array
-    weather.foreach(w => {
-        let weatherDate = new Date(w[i].datetime).getTime();
+    // Find the correct date from 16 date forcast array
+    for (let i = 0; i < weather.length; i++) {
+        let weatherDate = new Date(weather[i].datetime).getTime();
         if (weatherDate >= date) {
             temp += `<tr>
-                    <th scope="row">${i}</th>
-                    <td>${w[i].temp}&#8451;</td>
+                    <th scope="row">${counter}</th>
+                    <td>${weather[i].temp}&#8451;</td>
                     </tr> `;
-            if (i == duration || i == 10 || duration == 0) {
+            if (counter == duration || counter == 10 || duration == 0) {
                 temp += ` </tbody>
                         </table>`  ;
-                return;
+                break;
             }
-            i++;
+            counter++;
         }
-    });
+    }
     
 
     document.getElementById('temp').innerHTML = temp;
